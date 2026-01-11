@@ -9,6 +9,8 @@
     margin-inline-start: 0;
     padding-inline-start: 0;
     list-style: none;
+    box-sizing: border-box;
+    font-size: 1rem;
 }
 a{
     color: inherit;
@@ -16,8 +18,8 @@ a{
 }
 body{
     display: grid;
-    grid-template: max(200px, 25vh) 1fr / 400px 1fr;
-    height: 100vh;
+    grid-template: max(200px, 25vh) 1fr / 320px 1fr;
+    min-height: 100vh;
 }
 #header{
     background-color: aqua;
@@ -28,26 +30,28 @@ body{
     background-color: blueviolet;
     grid-row: 1 / -1;
     grid-column: 1 / 2;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(3, min-content);
+    padding: 20px;
 }
-    #pageTitle>img{ grid-column: 1/2;}
-    #pageTitle>h1{
-        font-size: 2.5rem;
-    }
-    #nav>ul{
-        margin-top: 40px;
-        grid-column: 1/2;
-    }
-        #nav>ul>li{
-            font-size: 1.4rem;
-        }
-            #nav>ul>li>a{
-                display: flex;
-                align-items: center;
-                gap: 20px;
-            }
+#pageTitle, #nav li a{
+    display: flex;
+    align-items: center;
+}
+.navIconBox{
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    margin-right: 20px;
+}
+#nav li img {
+    width: 40px;
+}
+.navGroup{
+    margin-top: 30px;
+}
+#nav li{
+    width: min-content;
+    font-size: 1.3rem;
+}
 #content{
     background-color: brown;
     grid-column: 2 / -1;
@@ -59,9 +63,6 @@ body{
 }
     .sectionLabel{
         padding-bottom: 10px;
-    }
-    #projects{
-        
     }
         #projectsGrid{
             display: grid;
@@ -81,7 +82,11 @@ body{
             }
                 .projectCard>h3{
                     font-size: 1.3rem;
-                    margin-bottom: 10px;
+                    font-weight: 900;
+                    margin-bottom: 15px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
                 .projectCard>p{
                     display: -webkit-box;
@@ -98,23 +103,83 @@ body{
                     margin-top: auto;
                     gap: 15px;
                 }
-
-    #announcements{
+    #sidebar{
         display: flex;
         flex-direction: column;
+        gap: 20px;
+        grid-column: 2/-1;
+        grid-row: 1/-1;
+        height: 100%;
+    }
+        #announcements{
+        display: flex;
+        flex-direction: column;
+        background-color: aliceblue;
+        border-radius: 10px;
+        padding: 20px;
     }
         .announcement{
             overflow: hidden;
         }
+            .announcement>h2{
+                font-size: 1.2rem;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
             .announcement>p{
                 display: -webkit-box;
                 -webkit-box-orient: vertical;
-                -webkit-line-clamp: 3;
-                line-clamp: 3;
+                -webkit-line-clamp: 2;
+                line-clamp: 2;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 width: 100%;
+                font-size: 1.1rem;
+            }
+            #announcements hr{
+                margin: 10px;
             }
     #trending{
-
+        background-color: aliceblue;
+        border-radius: 10px;
+        padding: 15px;
     }
+        .trendingItem{
+            display: grid;
+            grid-template-columns: min-content 1fr;
+            grid-template-rows: 1fr 1fr;
+            align-items: center;
+            overflow: hidden;
+        }
+            .trendingItem+.trendingItem{
+                margin-top: 10px;
+            }
+            .trendingItem>p:nth-of-type(1){
+                font-weight: 900;
+                grid-column: 2/-1;
+                grid-row: 1/2;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .trendingItem>p:nth-of-type(2){
+                grid-column: 2/-1;
+                grid-row: 2/3;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+                .trendingAvatar{
+                    width: 50px;
+                    height: 50px;
+                    overflow: hidden;
+                    grid-row: 1/-1;
+                    grid-column: 1/2;
+                    margin-right: 15px;
+                }
+                .trendingItem>.trendingAvatar>img{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                }
